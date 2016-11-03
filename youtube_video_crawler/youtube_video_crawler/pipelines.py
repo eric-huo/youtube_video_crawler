@@ -7,5 +7,11 @@
 
 
 class YoutubeVideoCrawlerPipeline(object):
+    video_url_num = 0
+
+    def close_spider(self, spider):
+        print YoutubeVideoCrawlerPipeline.video_url_num
+
     def process_item(self, item, spider):
+        YoutubeVideoCrawlerPipeline.video_url_num += 1
         return item
