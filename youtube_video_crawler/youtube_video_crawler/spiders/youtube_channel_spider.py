@@ -11,7 +11,7 @@ class YoutubeChannelSpider(scrapy.Spider):
     @staticmethod
     def read_channel_urls_from_file():
         file_dir = os.path.dirname(os.path.realpath(__file__))
-        file_path = os.path.join(file_dir, 'channel_url_test.txt')
+        file_path = os.path.join(file_dir, 'channel_urls.txt')
         print file_path
         with open(file_path, 'r') as f:
             urls = f.readlines()
