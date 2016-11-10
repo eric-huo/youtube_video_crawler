@@ -20,10 +20,11 @@ def download_video(video_url, video_id):
         'noplaylist': True,
         'sleep_interval': 10,
         'max_sleep_interval': 20,
-        'outtmpl': 'youtube_videos/' + str(video_id) + '.mp4',
+        'outtmpl': '/home/youtube_videos/' + str(video_id) + '.mp4',
         'progress_hooks': [output_log]
     }
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        print 'start to download: ' + video_id
         ydl.download([video_url])
 
 
