@@ -30,7 +30,7 @@ def download_video(video_url, video_id):
 
 def query_from_mysql():
     try:
-        cursor.execute('select video_url, id from youtube_video where is_downloaded = 0 limit 2')
+        cursor.execute('select video_url, id from youtube_video where is_downloaded = 0')
         rows = cursor.fetchall()
         urls_with_ids = [(row[0], row[1]) for row in rows]
         return urls_with_ids
