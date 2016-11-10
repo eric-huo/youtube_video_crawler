@@ -24,7 +24,7 @@ def download_video(video_url, video_id):
         'progress_hooks': [output_log]
     }
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        print 'start to download: ' + video_id
+        print 'start to download: ' + str(video_id)
         ydl.download([video_url])
 
 
