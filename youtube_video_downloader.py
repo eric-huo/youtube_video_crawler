@@ -21,6 +21,7 @@ def download_video(video_url, video_id):
         'sleep_interval': 10,
         'max_sleep_interval': 20,
         'outtmpl': '/home/youtube_videos/' + str(video_id) + '.mp4',
+        # 'outtmpl': 'youtube_videos/' + str(video_id) + '.mp4',
         'progress_hooks': [output_log]
     }
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
@@ -28,9 +29,13 @@ def download_video(video_url, video_id):
         ydl.download([video_url])
 
 
-def query_from_mysql():
+def query_from_mysql(only_highest_priority=True):
+    priority = 3
+    if only_highest_priority:
+        priority = 0
     try:
-        cursor.execute('select video_url, id from youtube_video where is_downloaded = 0')
+        cursor.execute('select v.video_url, v.id from youtube_video v join youtube_channel c '
+                       'on v.channel_id = c.id where v.is_downloaded = 0 and c.priority = ' + str(priority))
         rows = cursor.fetchall()
         urls_with_ids = [(row[0], row[1]) for row in rows]
         return urls_with_ids
